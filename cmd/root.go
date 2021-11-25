@@ -26,6 +26,9 @@ import (
 
 var cfgFile string
 
+var name string
+var school string
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "gcobra",
@@ -39,6 +42,12 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
+	Run: func(cmd *cobra.Command, args []string) {
+		if len(name) != 0 {
+			fmt.Printf("MY name is %s, i’m coming from %s ", name, school)
+		}
+		fmt.Println("Hello World")
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -59,6 +68,10 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	// 全域參數
+	rootCmd.Flags().StringVarP(&name, "name", "n", "", "your name")
+	rootCmd.Flags().StringVarP(&school, "school", "s", "", "your school")
 }
 
 // initConfig reads in config file and ENV variables if set.
